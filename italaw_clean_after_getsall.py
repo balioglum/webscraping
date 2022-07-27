@@ -20,8 +20,10 @@ new_value = {
     }
 }
 
-df_new=df.replace(new_value,regex=True)
-print(df_new)
+# new_value ya göre sadece case kolonunu regexle temizleyip, case_New adında yeni kolon ekliyor
+# df.iloc[:,0] -> sadece case kolonuna bakıyor
+# .to_frame(name='case') -> tek kolonu seriese çevirdiği için case adında yeni sütun isimli dataframe oluşturuyor
+# axis=1 sütünlardan yanyana concat et
 df_=pd.concat([df,df.iloc[:,0].to_frame(name='case').replace(new_value,regex=True).add_suffix('_New')],axis=1).sort_index(axis=1)
 
 
