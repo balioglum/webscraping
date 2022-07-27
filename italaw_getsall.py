@@ -29,12 +29,14 @@ html = '''<div id="hour3">
     </div>'''
 
 #soup = BeautifulSoup(html, 'html.parser')
-for i in range(1850, 2023):
+for i in range(2015, 2016):
     html = requests.get(f'https://www.italaw.com/browse/chronological?field_case_document_date_value%5Bvalue%5D%5Byear%5D={i}').content
     soup = BeautifulSoup(html, 'html.parser')
     result = {}
     link = []
 
+# To convert a list to dictionary, we can use list comprehension and make a key:value pair of consecutive elements. 
+# Finally, typecase the list to dict type. 
     def convert(lst):
         res_dct = {lst[i]: lst[i + 1] for i in range(0, len(lst), 2)}
         return res_dct
@@ -68,7 +70,7 @@ for i in range(1850, 2023):
                 wr = convert(link)
                 print(wr)
                 print(type(wr))
-                with open('italaw_docfiles.csv', 'a') as f:
+                with open('italaw_docfiles_2015.csv', 'a') as f:
                     writer = csv.writer(f)
                     for key, value in wr.items():
                         writer.writerow([key, value])
