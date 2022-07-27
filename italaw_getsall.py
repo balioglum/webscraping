@@ -30,8 +30,7 @@ html = '''<div id="hour3">
 
 #soup = BeautifulSoup(html, 'html.parser')
 for i in range(1850, 2023):
-    html = requests.get(
-        f'https://www.italaw.com/browse/chronological?field_case_document_date_value%5Bvalue%5D%5Byear%5D={i}').content
+    html = requests.get(f'https://www.italaw.com/browse/chronological?field_case_document_date_value%5Bvalue%5D%5Byear%5D={i}').content
     soup = BeautifulSoup(html, 'html.parser')
     result = {}
     link = []
