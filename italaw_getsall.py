@@ -82,10 +82,7 @@ for i in range(2015, 2016):
              for key, value in wr.items():
                 writer.writerow([key, value])
         link = []
-            #  writer = csv.DictWriter(f,fieldnames = header_info)
-            #  writer.writeheader()
-            #  writer.writerows([wr])
-
+         
           # link.append(m)
     # print(f"{case.strip()},{date.strip()},{convert(link)}")
 
