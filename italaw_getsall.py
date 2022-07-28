@@ -12,18 +12,15 @@ def convert(lst):
 for i in range(1850, 2023):
     html = requests.get(f'https://www.italaw.com/browse/chronological?field_case_type_tid%5B%5D=1717&field_case_type_tid%5B%5D=1687&field_case_type_tid%5B%5D=1090&field_case_type_tid%5B%5D=1703&field_case_type_tid%5B%5D=1702&field_case_type_tid%5B%5D=1714&field_case_type_tid%5B%5D=1091&field_case_type_tid%5B%5D=1092&field_case_type_tid%5B%5D=1093&field_case_type_tid%5B%5D=1097&field_case_type_tid%5B%5D=1095&field_case_type_tid%5B%5D=1094&field_case_type_tid%5B%5D=1096&field_case_type_tid%5B%5D=1099&field_case_type_tid%5B%5D=1173&field_case_type_tid%5B%5D=1100&field_case_document_date_value%5Bvalue%5D%5Byear%5D={i}').content
     soup = BeautifulSoup(html, 'html.parser')
-    result = {}
     link = []
 
-
-
-    
     # öncelikle tekrarlanan en büyük divi seç, table row gibi aynı
     # ,limit=16):
     for row in soup.select('#content > div > div > div.view-content > div.views-row'):
         # tarih seçiyor
         # content attributenın valuesunu alıyorum
         date = row.find('span', {'class': 'date-display-single'})['content']
+    
         case = row.find(
             'div', {'class': 'views-field-field-case-citation'}).get_text().replace('\n', '')
         #Strategic Infrasol Foodstuff LLC davasında gereksiz bir newline koyuyor, bunu düzeltmek için .replace('\n', '') 
@@ -40,7 +37,7 @@ for i in range(1850, 2023):
             try:
                 dname = (m.contents[0])
                 dlink = m.get('href')
-
+                
                 link.append(f"{case.strip()}_{dname}")
                 link.append(dlink)
                 wr = convert(link)
